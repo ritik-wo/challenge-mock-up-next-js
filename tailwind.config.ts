@@ -23,6 +23,9 @@ const config: Config = {
       },
       borderRadius: {
         xl: '12px'
+      },
+      fontFamily: {
+        sans: ['var(--default-font-family)']
       }
     },
   },

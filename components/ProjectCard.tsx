@@ -8,19 +8,73 @@ export type ProjectCardProps = {
 
 export function ProjectCard({ title, createdAt }: ProjectCardProps) {
   return (
-    <div className="card p-4 flex items-center justify-between">
+    <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-5 py-6">
       <div className="flex items-center gap-3">
-        <div className="h-9 w-9 grid place-items-center rounded-lg bg-gray-100 border">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 7h18M3 7l3-4h6l3 4M5 7v13h14V7"/></svg>
-        </div>
+        {/* Folder icon (plain) */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="w-5 h-5 text-gray-600"
+          aria-hidden="true"
+        >
+          <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path>
+        </svg>
         <div>
-          <div className="font-medium">{title}</div>
+          <div className="text-sm font-semibold text-gray-900">{title}</div>
           <div className="text-xs text-gray-500">Created: {createdAt}</div>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <button className={clsx('px-3 py-1.5 text-sm rounded-lg border bg-white hover:bg-gray-50')}>View</button>
-        <button className={clsx('px-3 py-1.5 text-sm rounded-lg border border-red-200 text-red-600 bg-red-50 hover:bg-red-100')}>Delete</button>
+        <button
+          aria-label={`View ${title}`}
+          className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
+        >
+          {/* Eye icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4 h-4"
+            aria-hidden="true"
+          >
+            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          View
+        </button>
+        <button
+          aria-label={`Delete ${title}`}
+          className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
+        >
+          {/* Trash2 icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-4 h-4"
+            aria-hidden="true"
+          >
+            <path d="M10 11v6"></path>
+            <path d="M14 11v6"></path>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+            <path d="M3 6h18"></path>
+            <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          Delete
+        </button>
       </div>
     </div>
   );
