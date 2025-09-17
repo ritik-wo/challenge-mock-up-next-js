@@ -1,13 +1,57 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectCard } from '@/components/ProjectCard';
+import { ProjectDetailModal, type Project } from '@/components/ProjectDetailModal';
 
 const projects = [
-  { title: 'Skyline Towers', createdAt: '2025-08-15' },
-  { title: 'Garden Residency', createdAt: '2025-08-15' },
+  {
+    title: 'Skyline Towers',
+    projectUrl: 'https://skylinetowers.com',
+    videos: [
+      { label: 'Project Overview Video', url: 'https://youtube.com/watch?v=sample1' },
+      { label: 'Virtual Tour', url: 'https://vimeo.com/sample2' }
+    ],
+    coordinates: { lat: 19.0760, lng: 72.8777 },
+    documents: [{ name: 'Skyline_Towers_Brochure.pdf', type: 'PDF Document' }],
+    createdAt: '2025-08-15'
+  },
+  {
+    title: 'Garden Residency',
+    projectUrl: 'https://gardenresidency.com',
+    videos: [
+      { label: 'Amenities Showcase', url: 'https://youtube.com/watch?v=sample3' }
+    ],
+    coordinates: { lat: 19.1136, lng: 72.8697 },
+    documents: [{ name: 'Garden_Residency_Brochure.pdf', type: 'PDF Document' }],
+    createdAt: '2025-08-15'
+  }
 ];
 
+
 export default function ProjectsPage() {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState<Project | null>(null);
+
+  const openFor = (p: {
+    title: string;
+    projectUrl?: string;
+    videos?: Array<{ label: string; url: string }>;
+    coordinates?: { lat: number; lng: number };
+    documents?: Array<{ name: string; type?: string }>;
+    createdAt: string;
+  }) => {
+    const project: Project = {
+      title: p.title,
+      createdAt: p.createdAt,
+      url: p.projectUrl,
+      videos: p.videos,
+      coordinates: p.coordinates ? `${p.coordinates.lat}, ${p.coordinates.lng}` : undefined,
+      documents: p.documents,
+    };
+    setSelected(project);
+    setOpen(true);
+  };
+
   return (
     <div className="space-y-6">
       {/* Header / Hero */}
@@ -29,7 +73,12 @@ export default function ProjectsPage() {
         <div className="text-sm text-gray-900 mb-4">Existing Projects</div>
         <div className="space-y-3">
           {projects.map((p) => (
-            <ProjectCard key={p.title} title={p.title} createdAt={p.createdAt} />
+            <ProjectCard
+              key={p.title}
+              title={p.title}
+              createdAt={p.createdAt}
+              onView={() => openFor(p)}
+            />
           ))}
         </div>
       </section>
@@ -43,6 +92,8 @@ export default function ProjectsPage() {
           placeholder="https://sharepoint.com/..."
         />
       </section>
+
+      <ProjectDetailModal open={open} onClose={() => setOpen(false)} project={selected} />
     </div>
   );
 }

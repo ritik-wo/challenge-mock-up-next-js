@@ -4,9 +4,11 @@ import clsx from 'clsx';
 export type ProjectCardProps = {
   title: string;
   createdAt: string;
+  onView?: () => void;
+  onDelete?: () => void;
 };
 
-export function ProjectCard({ title, createdAt }: ProjectCardProps) {
+export function ProjectCard({ title, createdAt, onView, onDelete }: ProjectCardProps) {
   return (
     <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-5 py-6">
       <div className="flex items-center gap-3">
@@ -33,6 +35,7 @@ export function ProjectCard({ title, createdAt }: ProjectCardProps) {
         <button
           aria-label={`View ${title}`}
           className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
+          onClick={onView}
         >
           {/* Eye icon */}
           <svg
@@ -54,6 +57,7 @@ export function ProjectCard({ title, createdAt }: ProjectCardProps) {
         <button
           aria-label={`Delete ${title}`}
           className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
+          onClick={onDelete}
         >
           {/* Trash2 icon */}
           <svg
