@@ -1,9 +1,11 @@
 "use client";
 import React, { useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { ProjectCard } from '@/components/ProjectCard';
 import { ProjectDetailModal, type Project } from '@/components/ProjectDetailModal';
+import { NewProjectForm } from '@/components/NewProjectForm';
 
-const projects = [
+const defaultProjects = [
   {
     title: 'Skyline Towers',
     projectUrl: 'https://skylinetowers.com',
@@ -31,6 +33,8 @@ const projects = [
 export default function ProjectsPage() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Project | null>(null);
+  const [showNewForm, setShowNewForm] = useState(false);
+  const [items, setItems] = useState(defaultProjects);
 
   const openFor = (p: {
     title: string;
@@ -52,6 +56,34 @@ export default function ProjectsPage() {
     setOpen(true);
   };
 
+  const handleSaveNew = (vals: any) => {
+    // vals comes from NewProjectForm: { name, projectUrl, coordinates, videos: [{url, description}], documents: {...} }
+    let lat = 0, lng = 0;
+    if (typeof vals.coordinates === 'string') {
+      const m = vals.coordinates.match(/^\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/);
+      if (m) { lat = parseFloat(m[1]); lng = parseFloat(m[2]); }
+    }
+    const videos = Array.isArray(vals.videos)
+      ? vals.videos
+          .filter((v: any) => v.url)
+          .map((v: any) => ({ label: v.description || 'Video', url: v.url }))
+      : [];
+    const today = new Date().toISOString().slice(0, 10);
+    const newItem = {
+      title: vals.name,
+      projectUrl: vals.projectUrl,
+      videos,
+      coordinates: { lat, lng },
+      documents: [],
+      createdAt: today,
+    };
+    setItems((prev) => [newItem, ...prev]);
+    setShowNewForm(false);
+    
+    // Show success toast
+    toast.success('Project added successfully!');
+  };
+
   return (
     <div className="space-y-6">
       {/* Header / Hero */}
@@ -60,7 +92,7 @@ export default function ProjectsPage() {
           <h1 className="text-xl sm:text-xl font-semibold">Details about our projects</h1>
           <p className="mt-1 text-sm text-gray-500">Upload and manage project documentation and details</p>
         </div>
-        <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project">
+        <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
           <span className="grid place-items-center h-5 w-5">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
           </span>
@@ -68,11 +100,18 @@ export default function ProjectsPage() {
         </button>
       </div>
 
+      {showNewForm && (
+        <NewProjectForm
+          onCancel={() => setShowNewForm(false)}
+          onSave={handleSaveNew}
+        />
+      )}
+
       {/* Existing Projects */}
       <section className="card p-4">
         <div className="text-sm text-gray-900 mb-4">Existing Projects</div>
         <div className="space-y-3">
-          {projects.map((p) => (
+          {items.map((p) => (
             <ProjectCard
               key={p.title}
               title={p.title}
@@ -94,6 +133,7 @@ export default function ProjectsPage() {
       </section>
 
       <ProjectDetailModal open={open} onClose={() => setOpen(false)} project={selected} />
+      <Toaster position="top-right" />
     </div>
   );
 }
