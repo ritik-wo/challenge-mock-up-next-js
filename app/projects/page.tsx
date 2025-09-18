@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { ProjectCard } from '@/components/ProjectCard';
 import { ProjectDetailModal, type Project } from '@/components/ProjectDetailModal';
 import { NewProjectForm } from '@/components/NewProjectForm';
+import { PlusIcon } from '@/components/icons';
 
 const defaultProjects = [
   {
@@ -93,9 +94,7 @@ export default function ProjectsPage() {
           <p className="mt-1 text-sm text-gray-500">Upload and manage project documentation and details</p>
         </div>
         <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
-          <span className="grid place-items-center h-5 w-5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-          </span>
+          <PlusIcon className="w-4 h-4" />
           Add New Project
         </button>
       </div>
@@ -127,7 +126,7 @@ export default function ProjectsPage() {
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input
           aria-label="SharePoint link"
-          className="w-full rounded-lg border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
+          className="w-full rounded-lg border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
           placeholder="https://sharepoint.com/..."
         />
       </section>

@@ -3,6 +3,7 @@ import React from 'react';
 import { useForm, useFieldArray, Controller, useWatch } from 'react-hook-form';
 import { FileIcon, LinkIcon, VideoIcon, MapPinIcon, PlusIcon } from './icons';
 import { FileUploadCustom } from './FileUploadCustom';
+import { colors } from '../styles/colors';
 
 export type NewProjectFormProps = {
   onCancel?: () => void;
@@ -74,9 +75,14 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       className="card p-4 space-y-4"
       data-testid="new-project-form"
     >
+      {/* Form Title */}
+      <div className="mb-4">
+        <h2 className={`text-sm ${colors.text.primary}`}>Add New Project</h2>
+      </div>
+
       {/* 3) Project Name * */}
       <div>
-        <label htmlFor="project-name" className="text-sm font-medium mb-2 inline-block">
+        <label htmlFor="project-name" className={`text-sm font-medium mb-2 inline-block ${colors.text.primary}`}>
           Project Name *
         </label>
         <input
@@ -106,7 +112,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             control={control}
             name={'documents.brochure'}
             render={({ field }: { field: { value: File[]; onChange: (v: File[]) => void } }) => (
-              <FileUploadCustom onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
+              <FileUploadCustom multiple={false} onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
             )}
           />
         </div>
@@ -119,7 +125,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             control={control}
             name={'documents.floorPlan'}
             render={({ field }: { field: { value: File[]; onChange: (v: File[]) => void } }) => (
-              <FileUploadCustom onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
+              <FileUploadCustom multiple={false} onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
             )}
           />
         </div>
@@ -248,7 +254,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             control={control}
             name={'documents.spa'}
             render={({ field }: { field: { value: File[]; onChange: (v: File[]) => void } }) => (
-              <FileUploadCustom onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
+              <FileUploadCustom multiple={false} onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
             )}
           />
         </div>
@@ -261,7 +267,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             control={control}
             name={'documents.others'}
             render={({ field }: { field: { value: File[]; onChange: (v: File[]) => void } }) => (
-              <FileUploadCustom onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
+              <FileUploadCustom multiple={false} onFilesSelected={(fl) => field.onChange(Array.from(fl))} />
             )}
           />
         </div>

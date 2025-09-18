@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { MenuIcon } from './icons';
 
 export type TopbarProps = {
   onMenuClick: () => void;
@@ -14,7 +15,7 @@ export function Topbar({ onMenuClick }: TopbarProps) {
           onClick={onMenuClick}
           aria-label="Open Menu"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <MenuIcon className="w-5 h-5" />
         </button>
       </div>
     </div>
