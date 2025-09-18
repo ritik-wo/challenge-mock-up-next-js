@@ -1,23 +1,22 @@
 export const colors = {
-  // Text colors
   text: {
     primary: 'text-gray-900',      
     secondary: 'text-gray-700',    
     tertiary: 'text-gray-500',    
+    quaternary: 'text-gray-600',
     muted: 'text-gray-400',       
     white: 'text-white',          
   },
   
-  // Background colors
   bg: {
     primary: 'bg-white',           
     secondary: 'bg-gray-50',       
-    tertiary: 'bg-gray-100',       
+    tertiary: 'bg-gray-100',
+    quaternary: 'bg-gray-200',       
     dark: 'bg-gray-900',           
     overlay: 'bg-black/30',        
   },
   
-  // Border colors
   border: {
     light: 'border-gray-200',      
     medium: 'border-gray-300',     

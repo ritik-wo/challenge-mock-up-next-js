@@ -5,6 +5,7 @@ import { DocumentCard, type Document } from './DocumentCard';
 import { DocumentPreviewModal } from './DocumentPreviewModal';
 import { ConfirmDeleteModal } from './ConfirmDeleteModal';
 import toast from 'react-hot-toast';
+import { colors } from '../styles/colors';
 
 export type DocumentSectionProps = {
   title: string;
@@ -27,7 +28,6 @@ export function DocumentSection({
 }: DocumentSectionProps) {
   const [showPreview, setShowPreview] = useState(false);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
-  const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const [modalType, setModalType] = useState<'preview' | 'delete'>('preview');
 
   const handleFilesSelected = (files: FileList) => {
@@ -47,14 +47,14 @@ export function DocumentSection({
 
   return (
     <div className={className}>
-      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+      <div className={`${colors.bg.primary} rounded-lg border ${colors.border.light} p-6 space-y-6`}>
         <div className="flex items-start gap-3">
           <div className={`w-10 h-10 rounded-lg ${iconBgColor} flex items-center justify-center flex-shrink-0 mt-1`}>
             {icon}
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-            <p className="text-sm text-gray-600">{description}</p>
+            <h2 className={`text-lg font-semibold ${colors.text.primary}`}>{title}</h2>
+            <p className={`text-sm ${colors.text.quaternary}`}>{description}</p>
           </div>
         </div>
         <FileUploadCustom
@@ -67,10 +67,10 @@ export function DocumentSection({
         {staticDocuments.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-base font-medium text-gray-900">
+              <h3 className={`text-base font-medium ${colors.text.primary}`}>
                 {currentSectionTitle}
               </h3>
-              <span className="text-sm text-gray-500">
+              <span className={`text-sm ${colors.text.tertiary}`}>
                 {staticDocuments.length} document{staticDocuments.length !== 1 ? 's' : ''}
               </span>
             </div>

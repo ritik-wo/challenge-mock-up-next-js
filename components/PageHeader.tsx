@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import { colors } from '../styles/colors';
 
 export type PageHeaderProps = {
   title: string;
@@ -16,7 +17,7 @@ export function PageHeader({ title, subtitle, rightSlot, id }: PageHeaderProps) 
         <div className="min-w-0">
           <h1 id={id} className="text-xl sm:text-xl font-semibold">{title}</h1>
           {subtitle ? (
-            <p className="mt-1 text-base text-gray-500">{subtitle}</p>
+            <p className={`mt-1 text-base ${colors.text.tertiary}`}>{subtitle}</p>
           ) : null}
         </div>
         <div className="shrink-0 sm:ml-0 ml-2">
@@ -30,7 +31,7 @@ export function PageHeader({ title, subtitle, rightSlot, id }: PageHeaderProps) 
     <div>
       <h1 id={id} className="text-lg sm:text-xl font-semibold">{title}</h1>
       {subtitle ? (
-        <p className="mt-1 text-sm text-gray-500">{subtitle}</p>
+        <p className={`mt-1 text-sm ${colors.text.tertiary}`}>{subtitle}</p>
       ) : null}
     </div>
   );

@@ -38,7 +38,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
      >
         <div className={`px-5 py-6 border-b ${colors.border.light}`}>
           <div className={`text-base font-semibold flex items-center gap-2 ${colors.text.primary}`}>
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-900">
+            <span className={`inline-flex h-8 w-8 items-center justify-center rounded-md ${colors.bg.dark}`}>
               <FolderOpenIcon className="w-4 h-4 text-white" />
             </span>
             <span>Sales Admin Panel</span>
@@ -53,8 +53,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 href={item.href}
                 data-testid={`nav-${item.label}`}
                 className={clsx(
-                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm hover:bg-gray-100',
-                  active ? `bg-gray-200 ${colors.text.primary}` : `${colors.text.secondary} ${colors.hover.text}`
+                  `flex items-center gap-2 px-4 py-2 rounded-lg text-sm ${colors.hover.medium}`,
+                  active ? `${colors.bg.quaternary} ${colors.text.primary}` : `${colors.text.secondary} ${colors.hover.text}`
                 )}
                 onClick={onClose}
               >
@@ -69,7 +69,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           })}
         </nav>
         <div className={`mt-auto p-4`}>
-          <button className={`w-full flex items-center gap-2 text-left px-4 py-2 text-sm ${colors.text.secondary} hover:bg-gray-100 rounded-lg`}>
+          <button className={`w-full flex items-center gap-2 text-left px-4 py-2 text-sm ${colors.text.secondary} ${colors.hover.medium} rounded-lg`}>
             <LogOutIcon className="w-4 h-4" />
             Log out
           </button>

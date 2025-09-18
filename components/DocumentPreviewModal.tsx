@@ -3,6 +3,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { FileIcon } from './icons';
 import type { Document } from './DocumentCard';
+import { colors } from '../styles/colors';
 
 export type DocumentPreviewModalProps = {
   open: boolean;
@@ -76,15 +77,15 @@ export function DocumentPreviewModal({ open, onClose, document: documentData, ty
         aria-hidden="true"
       />
       
-      <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 z-10">
+      <div className={`relative ${colors.bg.primary} rounded-lg p-6 w-full max-w-md mx-4 z-10`}>
         <div className="text-center">
-          <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-            <FileIcon className="w-6 h-6 text-gray-400" />
+          <div className={`w-12 h-12 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
+            <FileIcon className={`w-6 h-6 ${colors.text.muted}`} />
           </div>
-          <h3 id="document-preview-title" className="text-lg font-medium text-gray-900 mb-2">
+          <h3 id="document-preview-title" className={`text-lg font-medium ${colors.text.primary} mb-2`}>
             {type === 'delete' ? 'Cannot Delete Document' : 'Document Preview'}
           </h3>
-          <p className="text-gray-600 mb-6">
+          <p className={`${colors.text.quaternary} mb-6`}>
             {type === 'delete' 
               ? 'This is a static document and cannot be deleted' 
               : 'This is not an actual document'

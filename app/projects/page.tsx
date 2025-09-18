@@ -7,6 +7,7 @@ import { NewProjectForm } from '@/components/NewProjectForm';
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { PlusIcon, FolderIcon } from '@/components/icons';
 import { PageHeader } from '@/components/PageHeader';
+import { colors } from '../../styles/colors';
 
 const PROJECTS_STORAGE_KEY = 'proplens-projects';
 
@@ -220,14 +221,14 @@ export default function ProjectsPage() {
         />
       )}
       <section className="card p-6">
-        <div className="text-sm text-gray-900 mb-4">Existing Projects</div>
+        <div className={`text-sm ${colors.text.primary} mb-4`}>Existing Projects</div>
         {isLoading ? (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
+            <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
+              <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${colors.text.quaternary.replace('text-', 'border-')}`}></div>
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Loading projects...</h3>
-            <p className="text-gray-500">Please wait while we fetch your projects</p>
+            <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>Loading projects...</h3>
+            <p className={colors.text.tertiary}>Please wait while we fetch your projects</p>
           </div>
         ) : projects.length > 0 ? (
           <div className="space-y-3">
@@ -243,11 +244,11 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div className="text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-              <FolderIcon className="w-8 h-8 text-gray-400" />
+            <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
+              <FolderIcon className={`w-8 h-8 ${colors.text.muted}`} />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No projects yet</h3>
-            <p className="text-gray-500 mb-4">Get started by creating your first project</p>
+            <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>No projects yet</h3>
+            <p className={`${colors.text.tertiary} mb-4`}>Get started by creating your first project</p>
             <button 
               onClick={() => setShowNewForm(true)}
               className="inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-4 text-sm font-medium hover:bg-black/90"
@@ -263,7 +264,7 @@ export default function ProjectsPage() {
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input
           aria-label="SharePoint link"
-          className="w-[65%] rounded-lg border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 focus:shadow-sm"
+          className={`w-[65%] rounded-lg border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 focus:shadow-sm`}
           placeholder="https://sharepoint.com/..."
         />
       </section>

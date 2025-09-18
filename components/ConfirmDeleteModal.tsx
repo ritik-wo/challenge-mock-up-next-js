@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { createPortal } from 'react-dom';
+import { colors } from '../styles/colors';
 
 export type ConfirmDeleteModalProps = {
   open: boolean;
@@ -84,15 +85,15 @@ export function ConfirmDeleteModal({
       />
       
       <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 z-10">
-        <h2 id="confirm-delete-title" className="text-lg font-medium text-gray-900 mb-3">{title}</h2>
-        <p className="text-gray-600 mb-6">{message}</p>
+        <h2 id="confirm-delete-title" className={`text-lg font-medium ${colors.text.primary} mb-3`}>{title}</h2>
+        <p className={`${colors.text.quaternary} mb-6`}>{message}</p>
         
         <div className="flex items-center justify-end gap-3">
           <button
             type="button"
             ref={cancelBtnRef}
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+            className={`px-4 py-2 text-sm font-medium ${colors.text.secondary} ${colors.bg.tertiary} hover:${colors.bg.quaternary} rounded-md transition-colors`}
           >
             No
           </button>

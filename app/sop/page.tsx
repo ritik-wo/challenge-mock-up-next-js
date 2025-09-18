@@ -5,6 +5,7 @@ import { DocumentSection } from '@/components/DocumentSection';
 import { PageHeader } from '@/components/PageHeader';
 import { FileTextIcon, UsersIcon, UserPlusIcon } from '@/components/icons';
 import type { Document } from '@/components/DocumentCard';
+import { colors } from '../../styles/colors';
 
 const sopSections = [
   {
@@ -87,11 +88,11 @@ export default function SopPage() {
           subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
         />
         <div className="text-center py-12">
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
+          <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
+            <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${colors.text.quaternary.replace('text-', 'border-')}`}></div>
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Loading documents...</h3>
-          <p className="text-gray-500">Please wait while we fetch your documents</p>
+          <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>Loading documents...</h3>
+          <p className={colors.text.tertiary}>Please wait while we fetch your documents</p>
         </div>
       </div>
     );
