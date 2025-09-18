@@ -212,12 +212,12 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 -mt-4">
       {/* Header / Hero */}
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-xl sm:text-xl font-semibold">Details about our projects</h1>
-          <p className="mt-1 text-sm text-gray-500">Upload and manage project documentation and details</p>
+          <p className="mt-1 text-base text-gray-500">Upload and manage project documentation and details</p>
         </div>
         <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
           <PlusIcon className="w-4 h-4" />
@@ -233,7 +233,7 @@ export default function ProjectsPage() {
       )}
 
       {/* Existing Projects */}
-      <section className="card p-4">
+      <section className="card p-6">
         <div className="text-sm text-gray-900 mb-4">Existing Projects</div>
         {isLoading ? (
           <div className="text-center py-12">
@@ -278,7 +278,7 @@ export default function ProjectsPage() {
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input
           aria-label="SharePoint link"
-          className="w-full rounded-lg border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400 placeholder:text-xs focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
+          className="w-[65%] rounded-lg border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 focus:shadow-sm"
           placeholder="https://sharepoint.com/..."
         />
       </section>

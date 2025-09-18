@@ -2,6 +2,7 @@
 import React from 'react';
 import { CalendarIcon } from './icons';
 import { FolderIcon, LinkIcon, VideoIcon, MapPinIcon, FileIcon } from './icons';
+import { ViewButton } from './ActionButtons';
 
 export type Project = {
   title: string;
@@ -32,7 +33,7 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
               <h2 className="text-lg font-semibold">Project Details</h2>
               <p className="text-sm text-gray-500">Complete project information and documentation</p>
             </div>
-            <button onClick={onClose} className="text-sm text-gray-600 hover:text-gray-900">✕ Close</button>
+            <button onClick={onClose} className="text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-2 py-1 rounded transition-colors">✕ Close</button>
           </div>
 
           {/* Content */}
@@ -53,27 +54,33 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                   <LinkIcon className="w-4 h-4 text-gray-500" />
                   Project URL
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 rounded-md bg-gray-100 border px-4 py-3 text-sm text-gray-700 truncate">{project.url}</div>
-                  <a className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm hover:bg-gray-50" href={project.url} target="_blank" rel="noreferrer">Open</a>
+                <div className="flex items-center justify-between rounded-md bg-gray-100 border px-4 py-3">
+                  <div className="text-sm text-gray-700 truncate flex-1">{project.url}</div>
+                  <a className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm font-semibold hover:bg-gray-50 ml-2" href={project.url} target="_blank" rel="noreferrer">
+                    <LinkIcon className="w-4 h-4" />
+                    Open
+                  </a>
                 </div>
               </div>
             )}
 
             {/* Videos */}
             {!!project.videos?.length && (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 <div className="text-sm font-medium flex items-center gap-2 text-gray-900"><VideoIcon className="w-4 h-4 text-gray-500" /> Project Video Links</div>
                 {project.videos!.map((v) => (
-                  <div key={v.url} className="flex items-center justify-between rounded-md bg-gray-100 border px-4 py-3">
-                    <div className="flex items-start gap-2">
-                      <VideoIcon className="w-4 h-4 text-blue-600 mt-0.5" />
+                  <div key={v.url} className="flex items-center justify-between rounded-md bg-gray-100 border px-5 py-4">
+                    <div className="flex items-start">
+                      <VideoIcon className="w-4 h-4 text-blue-600 mt-0.5 mr-2" />
                       <div>
-                        <div className="text-sm font-medium">{v.label}</div>
-                        <div className="text-xs text-gray-600">{v.url}</div>
+                        <div className="text-sm font-medium mb-2">{v.label}</div>
+                        <div className="text-xs text-gray-600 -ml-6">{v.url}</div>
                       </div>
                     </div>
-                    <a href={v.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm hover:bg-gray-50">Watch</a>
+                    <a href={v.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm font-semibold hover:bg-gray-50">
+                      <VideoIcon className="w-4 h-4" />
+                      Watch
+                    </a>
                   </div>
                 ))}
               </div>
@@ -97,13 +104,15 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                 {project.documents!.map((d) => (
                   <div key={d.name} className="flex items-center justify-between rounded-md bg-gray-100 border px-4 py-3">
                     <div className="flex items-start gap-2">
-                      <FileIcon className="w-4 h-4 text-red-600 mt-0.5" />
+                      <div className="w-6 h-6 rounded bg-red-100 flex items-center justify-center mt-0.5">
+                        <FileIcon className="w-4 h-4 text-red-600" />
+                      </div>
                       <div>
                         <div className="text-sm font-medium">{d.name}</div>
                         <div className="text-xs text-gray-600">{d.type ?? 'Document'}</div>
                       </div>
                     </div>
-                    <button className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm hover:bg-gray-50">View</button>
+                    <ViewButton onClick={() => {}} />
                   </div>
                 ))}
               </div>
@@ -112,8 +121,7 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
             {/* Created Date */}
             <div>
               <div className="text-sm font-medium mb-2 flex items-center gap-2 text-gray-900">
-                {/* calendar icon */}
-                <CalendarIcon className="w-4 h-4 text-gray-500" />
+                <FolderIcon className="w-4 h-4 text-gray-500" />
                 Created Date
               </div>
               <div className="rounded-md bg-gray-100 border px-4 py-3 text-sm text-gray-700">{project.createdAt}</div>

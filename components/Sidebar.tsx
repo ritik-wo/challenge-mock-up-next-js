@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { clsx } from 'clsx';
-import { FolderOpenIcon, LogOutIcon } from './icons';
+import { FolderOpenIcon, LogOutIcon, FileTextIcon } from './icons';
 import { colors } from '../styles/colors';
 import React from 'react';
 import type { Route } from 'next';
@@ -32,7 +32,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       )}
       <aside
         className={clsx(
-          `fixed z-50 inset-y-0 left-0 w-64 ${colors.bg.primary} border-r ${colors.border.light} flex flex-col`,
+          `fixed z-50 inset-y-0 left-0 w-64 ${colors.bg.secondary} border-r ${colors.border.light} flex flex-col`,
           'transition-transform duration-200 md:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         )}
@@ -40,8 +40,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div className={`px-5 py-6 border-b ${colors.border.light}`}>
           <div className={`text-base font-semibold flex items-center gap-2 ${colors.text.primary}`}>
             {/* Title icon: folder-open with dark background */}
-            <span className={`inline-flex h-6 w-6 items-center justify-center rounded-md ${colors.bg.dark}`}>
-              <FolderOpenIcon className={`w-4 h-4 ${colors.text.white}`} />
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-900">
+              <FolderOpenIcon className="w-4 h-4 text-white" />
             </span>
             <span>Sales Admin Panel</span>
           </div>
@@ -55,20 +55,24 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 href={item.href}
                 data-testid={`nav-${item.label}`}
                 className={clsx(
-                  'flex items-center gap-2 px-4 py-2 rounded-2xl text-sm',
-                  active ? `${colors.bg.tertiary} ${colors.text.primary}` : `${colors.text.secondary} ${colors.hover.light} ${colors.hover.text}`
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm hover:bg-gray-100',
+                  active ? `bg-gray-200 ${colors.text.primary}` : `${colors.text.secondary} ${colors.hover.text}`
                 )}
                 onClick={onClose}
               >
                 {/* Item icons */}
-                <FolderOpenIcon className="w-4 h-4" />
+                {item.href === '/sop' ? (
+                  <FileTextIcon className="w-4 h-4" />
+                ) : (
+                  <FolderOpenIcon className="w-4 h-4" />
+                )}
                 <span>{item.label}</span>
               </Link>
             );
           })}
         </nav>
-        <div className={`mt-auto p-4 border-t ${colors.border.light}`}>
-          <button className={`w-full flex items-center gap-2 text-left px-4 py-2 text-sm ${colors.text.secondary} ${colors.hover.light} rounded-lg`}>
+        <div className={`mt-auto p-4`}>
+          <button className={`w-full flex items-center gap-2 text-left px-4 py-2 text-sm ${colors.text.secondary} hover:bg-gray-100 rounded-lg`}>
             <LogOutIcon className="w-4 h-4" />
             Log out
           </button>

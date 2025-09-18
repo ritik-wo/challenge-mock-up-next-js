@@ -11,13 +11,13 @@ export type ProjectCardProps = {
 
 export function ProjectCard({ title, createdAt, onView, onDelete }: ProjectCardProps) {
   return (
-    <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-5 py-6">
+    <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-4">
       <div className="flex items-center gap-3">
         {/* Folder icon (plain) */}
         <FolderIcon className="w-5 h-5 text-gray-500" />
         <div>
-          <div className="text-sm font-semibold text-gray-900">{title}</div>
-          <div className="text-xs text-gray-500">Created: {createdAt}</div>
+          <div className="text-base font-semibold text-gray-900">{title}</div>
+          <div className="text-base text-gray-500">Created: {createdAt}</div>
         </div>
       </div>
       <div className="flex items-center gap-2">
