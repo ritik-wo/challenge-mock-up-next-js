@@ -8,28 +8,84 @@ import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { PlusIcon, FolderIcon } from '@/components/icons';
 
 const PROJECTS_STORAGE_KEY = 'proplens-projects';
+
+// Default projects that always appear on page load
+const DEFAULT_PROJECTS: Project[] = [
+  {
+    title: "Skyline Towers",
+    url: "https://skylinetowers.com",
+    videos: [
+      {
+        label: "Project Overview Video",
+        url: "https://youtube.com/watch?v=sample1"
+      },
+      {
+        label: "Virtual Tour",
+        url: "https://vimeo.com/sample2"
+      }
+    ],
+    coordinates: "19.076, 72.8777",
+    documents: [
+      {
+        name: "Skyline_Towers_Brochure.pdf",
+        type: "PDF Document"
+      }
+    ],
+    createdAt: "2025-08-15"
+  },
+  {
+    title: "Garden Residency",
+    url: "https://gardenresidency.com",
+    videos: [
+      {
+        label: "Amenities Showcase",
+        url: "https://youtube.com/watch?v=sample3"
+      }
+    ],
+    coordinates: "19.1136, 72.8697",
+    documents: [
+      {
+        name: "Garden_Residency_Brochure.pdf",
+        type: "PDF Document"
+      }
+    ],
+    createdAt: "2025-08-15"
+  }
+];
+
 const projectsAPI = {
-  // Fetch all projects from localStorage
+  // Fetch all projects from localStorage and merge with defaults
   getAll: (): Project[] => {
     try {
       const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
-      return stored ? JSON.parse(stored) : [];
+      const userProjects = stored ? JSON.parse(stored) : [];
+      
+      // Always return default projects + user projects
+      // Filter out any user projects that have the same title as default projects
+      const filteredUserProjects = userProjects.filter((userProject: Project) => 
+        !DEFAULT_PROJECTS.some(defaultProject => defaultProject.title === userProject.title)
+      );
+      
+      return [...DEFAULT_PROJECTS, ...filteredUserProjects];
     } catch (error) {
       console.error('Error fetching projects from localStorage:', error);
-      return [];
+      return DEFAULT_PROJECTS;
     }
   },
 
-  // Save a new project to localStorage
+  // Save a new project to localStorage (only user projects)
   save: (project: any) => {
     try {
-      const projects = projectsAPI.getAll();
+      const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
+      const userProjects = stored ? JSON.parse(stored) : [];
+      
       const newProject: Project = {
         ...project,
         createdAt: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
       };
-      projects.push(newProject);
-      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
+      
+      userProjects.push(newProject);
+      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(userProjects));
       return newProject;
     } catch (error) {
       console.error('Error saving project to localStorage:', error);
@@ -37,12 +93,15 @@ const projectsAPI = {
     }
   },
 
-  // Delete a project by title
+  // Delete a project by title (only affects localStorage, not default projects)
   delete: (title: string) => {
     try {
-      const projects = projectsAPI.getAll();
-      const filteredProjects = projects.filter(p => p.title !== title);
-      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(filteredProjects));
+      const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
+      const userProjects = stored ? JSON.parse(stored) : [];
+      
+      // Only delete from user projects (localStorage), not default projects
+      const filteredUserProjects = userProjects.filter((p: Project) => p.title !== title);
+      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(filteredUserProjects));
     } catch (error) {
       console.error('Error deleting project from localStorage:', error);
       throw error;
