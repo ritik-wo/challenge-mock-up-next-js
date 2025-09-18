@@ -206,7 +206,7 @@ export default function ProjectsPage() {
         title="Details about our projects"
         subtitle="Upload and manage project documentation and details"
         rightSlot={(
-          <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
+          <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90 shrink-0 whitespace-nowrap" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
             <PlusIcon className="w-4 h-4" />
             Add New Project
           </button>

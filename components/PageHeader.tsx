@@ -12,14 +12,16 @@ export type PageHeaderProps = {
 export function PageHeader({ title, subtitle, rightSlot, id }: PageHeaderProps) {
   if (rightSlot) {
     return (
-      <div className="flex items-start justify-between">
-        <div>
+      <div className="flex justify-between sm:items-start items-center sm:gap-0 gap-2">
+        <div className="min-w-0">
           <h1 id={id} className="text-xl sm:text-xl font-semibold">{title}</h1>
           {subtitle ? (
             <p className="mt-1 text-base text-gray-500">{subtitle}</p>
           ) : null}
         </div>
-        {rightSlot}
+        <div className="shrink-0 sm:ml-0 ml-2">
+          {rightSlot}
+        </div>
       </div>
     );
   }

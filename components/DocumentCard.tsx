@@ -20,11 +20,11 @@ export type DocumentCardProps = {
 export function DocumentCard({ document, onView, onDelete }: DocumentCardProps) {
   return (
     <div className="flex items-center justify-between bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 transition-colors">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 min-w-0">
         <div className="w-5 h-5 flex items-center justify-center">
           <FileTextIcon className="w-5 h-5 text-blue-600" />
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="text-base font-medium text-gray-900">{document.name}</div>
           <div className="text-sm text-gray-500">
             Uploaded: {document.uploadDate} • {document.fileSize}
@@ -32,7 +32,7 @@ export function DocumentCard({ document, onView, onDelete }: DocumentCardProps) 
         </div>
       </div>
       
-      <div className="flex items-center gap-2">
+      <div className="flex gap-2 items-center shrink-0 whitespace-nowrap">
         <ViewButton onClick={onView} />
         <DeleteButton onClick={onDelete} />
       </div>
