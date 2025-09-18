@@ -57,7 +57,7 @@ export function DocumentSection({
           </div>
           <div>
             <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
-            <p className="text-sm text-gray-600 mt-1">{description}</p>
+            <p className="text-sm text-gray-600">{description}</p>
           </div>
         </div>
 
@@ -74,10 +74,10 @@ export function DocumentSection({
         {staticDocuments.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-medium text-gray-900">
+              <h3 className="text-base font-medium text-gray-900">
                 {currentSectionTitle}
               </h3>
-              <span className="text-xs text-gray-500">
+              <span className="text-sm text-gray-500">
                 {staticDocuments.length} document{staticDocuments.length !== 1 ? 's' : ''}
               </span>
             </div>

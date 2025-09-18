@@ -83,10 +83,10 @@ export default function SopPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 -mt-4">
         {/* Header */}
         <div>
-          <h1 className="text-xl sm:text-2xl font-semibold">SOP & Policies Management</h1>
+          <h1 className="text-lg sm:text-xl font-semibold">SOP & Policies Management</h1>
           <p className="mt-1 text-sm text-gray-500">Manage standard operating procedures, policies, and guidelines for your organization</p>
         </div>
 
@@ -103,10 +103,10 @@ export default function SopPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 -mt-4">
       {/* Header */}
       <div>
-        <h1 className="text-xl sm:text-2xl font-semibold">SOP & Policies Management</h1>
+        <h1 className="text-lg sm:text-xl font-semibold">SOP & Policies Management</h1>
         <p className="mt-1 text-sm text-gray-500">Manage standard operating procedures, policies, and guidelines for your organization</p>
       </div>
 

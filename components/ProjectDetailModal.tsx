@@ -97,26 +97,24 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
               </div>
             )}
 
-            {/* Documents */}
-            {!!project.documents?.length && (
-              <div className="space-y-2">
-                <div className="text-sm font-medium flex items-center gap-2 text-gray-900"><FileIcon className="w-4 h-4 text-gray-500" /> Project Documents</div>
-                {project.documents!.map((d) => (
-                  <div key={d.name} className="flex items-center justify-between rounded-md bg-gray-100 border px-4 py-3">
-                    <div className="flex items-start gap-2">
-                      <div className="w-6 h-6 rounded bg-red-100 flex items-center justify-center mt-0.5">
-                        <FileIcon className="w-4 h-4 text-red-600" />
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium">{d.name}</div>
-                        <div className="text-xs text-gray-600">{d.type ?? 'Document'}</div>
-                      </div>
-                    </div>
-                    <ViewButton onClick={() => {}} />
-                  </div>
-                ))}
+            {/* Documents (always show placeholder) */}
+            <div className="space-y-2">
+              <div className="text-sm font-medium flex items-center gap-2 text-gray-900">
+                <FileIcon className="w-4 h-4 text-gray-500" /> Project Documents
               </div>
-            )}
+              <div className="flex items-center justify-between rounded-md bg-gray-100 border px-4 py-3">
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 rounded bg-red-100 flex items-center justify-center mt-0.5">
+                    <FileIcon className="w-4 h-4 text-red-600" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">Sample_Project_Brochure.pdf</div>
+                    <div className="text-xs text-gray-600">PDF Document</div>
+                  </div>
+                </div>
+                <ViewButton onClick={() => {}} />
+              </div>
+            </div>
 
             {/* Created Date */}
             <div>

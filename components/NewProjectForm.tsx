@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { useForm, useFieldArray, Controller, useWatch } from 'react-hook-form';
-import { FileIcon, LinkIcon, VideoIcon, MapPinIcon, PlusIcon } from './icons';
+import { FileIcon, LinkIcon, VideoIcon, MapPinIcon, PlusIcon, UploadIcon } from './icons';
 import { FileUploadCustom } from './FileUploadCustom';
 import { colors } from '../styles/colors';
 
@@ -82,12 +82,12 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
 
       {/* 3) Project Name * */}
       <div>
-        <label htmlFor="project-name" className={`text-sm font-medium mb-2 inline-block ${colors.text.primary}`}>
+        <label htmlFor="project-name" className={`text-sm font-medium mb-2 block ${colors.text.primary}`}>
           Project Name *
         </label>
         <input
           id="project-name"
-          className="w-full rounded-md border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
+          className="w-[40%] rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
           placeholder="Enter project name"
           {...register('name', { required: 'Project name is required', setValueAs: (v) => (typeof v === 'string' ? v.trim() : v) })}
           aria-invalid={!!errors.name}
@@ -139,7 +139,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         <div className="flex items-center gap-2">
           <input
             id="project-url"
-            className="flex-1 rounded-md border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
+            className="w-[40%] rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-smF focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
             placeholder="https://example.com/project"
             {...register('projectUrl', {
               required: 'Project URL is required',
@@ -153,8 +153,9 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             onClick={() => {
               if (isValidUrl(watchedUrl || '')) window.open(watchedUrl, '_blank', 'noopener');
             }}
-            className="inline-flex items-center gap-2 rounded-md border bg-white h-8 px-3 text-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+            className="inline-flex items-center gap-2 rounded-md border border-gray-00 bg-white h-8 px-3 text-sm font-semibold hover:bg-gray-50 shadow-sm"
           >
+            <LinkIcon className="w-4 h-4" />
             Open
           </button>
         </div>
@@ -169,7 +170,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           <VideoIcon className="w-4 h-4 text-gray-500" /> Project Video Links
         </div>
         {fields.map((field, idx: number) => (
-          <div key={field.id} className="rounded-lg border p-3 bg-gray-50 space-y-2 relative">
+          <div key={field.id} className="rounded-lg border p-3 space-y-2 relative">
             {fields.length > 1 && (
               <button
                 type="button"
@@ -184,7 +185,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
               <label htmlFor={`videos.${idx}.url`} className="text-sm font-medium mb-1 inline-block">Video URL</label>
               <input
                 id={`videos.${idx}.url`}
-                className="w-full rounded-md border border-gray-200 bg-white text-gray-700 px-3 py-2"
+                className="w-full rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-3 py-2 placeholder:text-sm"
                 placeholder="https://youtube.com/watch?v=..."
                 {...register(`videos.${idx}.url` as const, {
                   validate: (v) => (!v || isValidUrl(v) ? true : 'Enter a valid URL'),
@@ -195,7 +196,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
               <label htmlFor={`videos.${idx}.description`} className="text-sm font-medium mb-1 inline-block">Video description</label>
               <input
                 id={`videos.${idx}.description`}
-                className="w-full rounded-md border border-gray-200 bg-white text-gray-700 px-3 py-2"
+                className="w-full rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-3 py-2 placeholder:text-sm"
                 placeholder="e.g., Project Overview, Virtual Tour, Amenities..."
                 {...register(`videos.${idx}.description` as const, { maxLength: 120 })}
               />
@@ -219,7 +220,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         </label>
         <input
           id="coordinates"
-          className="w-full rounded-md border border-gray-200 bg-white text-gray-700 px-3 py-2 placeholder:text-gray-400"
+          className="w-[40%] rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-3 py-2 placeholder:text-gray-400"
           placeholder="e.g., 19.0760, 72.8777"
           {...register('coordinates', {
             required: 'Location coordinates are required',
@@ -276,6 +277,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       {/* 8) Actions */}
       <div className="flex items-center gap-2 pt-2">
         <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-black text-white h-9 px-4 text-sm hover:bg-black/90">
+          <UploadIcon className="w-4 h-4" />
           Save Project
         </button>
         <button type="button" className="inline-flex items-center gap-2 rounded-md border h-9 px-4 text-sm hover:bg-gray-50" onClick={onCancel}>

@@ -91,8 +91,8 @@ export function FileUploadCustom({
           <div className="h-10 w-10 rounded-full bg-gray-100 text-gray-600 grid place-items-center mb-3">
             <UploadIcon className="w-5 h-5" />
           </div>
-          <div className="text-sm font-medium text-gray-900 mb-1">{title}</div>
-          <div className="text-xs text-gray-500 mb-4">{subtitle}</div>
+          <div className="text-base font-medium text-gray-900 mb-1">{title}</div>
+          <div className="text-sm text-gray-500 mb-4">{subtitle}</div>
           <button
             type="button"
             className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm text-gray-700 hover:bg-gray-50"
@@ -124,11 +124,16 @@ export function FileUploadCustom({
           </div>
           <div className="space-y-2">
             {uploadedFiles.map((file, index) => (
-              <div key={index} className="flex items-center justify-between bg-gray-50 rounded-lg p-3 border">
+              <div key={index} className="flex items-center justify-between bg-gray-100 rounded-lg p-3 border">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                  <div className="w-5 h-5 flex items-center justify-center">
+                    {/* Match Sales SOPs icon, but red */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-red-600">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                      <path d="M14 2v6h6" />
+                      <path d="M16 13H8" />
+                      <path d="M16 17H8" />
+                      <path d="M10 9H8" />
                     </svg>
                   </div>
                   <div>
