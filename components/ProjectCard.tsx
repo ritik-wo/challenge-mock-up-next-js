@@ -1,6 +1,6 @@
 import React from 'react';
-import { FolderIcon, EyeIcon, Trash2Icon } from './icons';
-import clsx from 'clsx';
+import { FolderIcon } from './icons';
+import { ViewButton, DeleteButton } from './ActionButtons';
 
 export type ProjectCardProps = {
   title: string;
@@ -21,24 +21,8 @@ export function ProjectCard({ title, createdAt, onView, onDelete }: ProjectCardP
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <button
-          aria-label={`View ${title}`}
-          className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
-          onClick={onView}
-        >
-          {/* Eye icon */}
-          <EyeIcon className="w-4 h-4" />
-          View
-        </button>
-        <button
-          aria-label={`Delete ${title}`}
-          className={clsx('inline-flex items-center gap-1 rounded-md border border-gray-300 bg-white h-8 px-3 text-sm font-medium text-gray-800 hover:bg-gray-50')}
-          onClick={onDelete}
-        >
-          {/* Trash2 icon */}
-          <Trash2Icon className="w-4 h-4" />
-          Delete
-        </button>
+        <ViewButton onClick={onView || (() => {})} />
+        <DeleteButton onClick={onDelete || (() => {})} />
       </div>
     </div>
   );

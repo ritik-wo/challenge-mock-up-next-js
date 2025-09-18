@@ -20,7 +20,7 @@ export function FileUploadCustom({
   subtitle = 'Drag and drop files here or click to browse', 
   className = '', 
   multiple = true,
-  acceptedTypes = ['pdf', 'jpg', 'jpeg']
+  acceptedTypes = ['pdf', 'doc', 'docx', 'ppt', 'pptx']
 }: FileUploadCustomProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
