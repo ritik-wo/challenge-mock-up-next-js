@@ -11,11 +11,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="min-h-screen flex bg-gray-50">
-          {/* Sidebar */}
           <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
-          {/* Content */}
-          <div className={clsx('flex-1 min-w-0', 'md:ml-64')}> {/* reserve space for desktop sidebar */}
+          <div className={clsx('flex-1 min-w-0', 'md:ml-64')}> 
             <Topbar onMenuClick={() => setSidebarOpen(true)} />
             <main className="container-max py-6">{children}</main>
           </div>

@@ -69,18 +69,14 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
     <form
       onSubmit={handleSubmit((vals: FormValues) => {
         persistToLocalStorage(vals);
-        // external submit callback if parent wants it
         onSave?.(vals);
       })}
       className="card p-4 space-y-4"
       data-testid="new-project-form"
     >
-      {/* Form Title */}
       <div className="mb-4">
         <h2 className={`text-sm ${colors.text.primary}`}>Add New Project</h2>
       </div>
-
-      {/* 3) Project Name * */}
       <div>
         <label htmlFor="project-name" className={`text-sm font-medium mb-2 block ${colors.text.primary}`}>
           Project Name *
@@ -97,13 +93,9 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         )}
       </div>
 
-      {/* Divider */}
       <div className="border-t my-2" />
-
-      {/* 4) Project Documents (group) - First two only */}
       <div className="space-y-3">
         <div className="text-sm font-medium">Project Documents</div>
-        {/* Brochure */}
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
             <FileIcon className="w-4 h-4 text-gray-500" /> Brochure
@@ -116,7 +108,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             )}
           />
         </div>
-        {/* Floor Plan Set */}
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
             <FileIcon className="w-4 h-4 text-gray-500" /> Floor Plan set
@@ -130,8 +121,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           />
         </div>
       </div>
-
-      {/* 5) Project URL * */}
       <div>
         <label htmlFor="project-url" className="text-sm font-medium mb-2 flex items-center gap-2">
           <LinkIcon className="w-4 h-4 text-gray-500" /> Project URL *
@@ -139,7 +128,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         <div className="flex items-center gap-2">
           <input
             id="project-url"
-            className="w-[40%] rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-smF focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
+            className="w-[40%] rounded-md border border-gray-200 bg-gray-100 text-gray-700 px-2 py-1.5 placeholder:text-gray-400 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400"
             placeholder="https://example.com/project"
             {...register('projectUrl', {
               required: 'Project URL is required',
@@ -163,8 +152,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           <span className="mt-1 block text-xs text-red-600" aria-live="polite">{errors.projectUrl.message}</span>
         )}
       </div>
-
-      {/* 6) Project Video Links (repeatable; 3 default) */}
       <div className="space-y-3">
         <div className="text-sm font-medium flex items-center gap-2">
           <VideoIcon className="w-4 h-4 text-gray-500" /> Project Video Links
@@ -212,8 +199,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           Add more links
         </button>
       </div>
-
-      {/* 7) Location coordinates (Lat/Long) * */}
       <div>
         <label htmlFor="coordinates" className="text-sm font-medium mb-2 flex items-center gap-2">
           <MapPinIcon className="w-4 h-4 text-gray-500" /> Location coordinates (Lat/Long) *
@@ -225,9 +210,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           {...register('coordinates', {
             required: 'Location coordinates are required',
             validate: (v) => {
-              // If empty, let the required rule handle the message
               if (!v || !v.trim()) return true;
-              // Validate "lat, long" with ranges
               const m = v.match(/^\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/);
               if (!m) return 'Enter as "lat, long"';
               const lat = parseFloat(m[1]);
@@ -243,10 +226,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           <span className="mt-1 block text-xs text-red-600" aria-live="polite">{errors.coordinates.message}</span>
         )}
       </div>
-
-      {/* SPA and Other uploaders after coordinates */}
       <div className="space-y-3">
-        {/* SPA (Sales Purchase Agreement) */}
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
             <FileIcon className="w-4 h-4 text-gray-500" /> SPA (Sales Purchase Agreement)
@@ -259,7 +239,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             )}
           />
         </div>
-        {/* Other Project Documents */}
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
             <FileIcon className="w-4 h-4 text-gray-500" /> Other Project Documents
@@ -273,8 +252,6 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           />
         </div>
       </div>
-
-      {/* 8) Actions */}
       <div className="flex items-center gap-2 pt-2">
         <button type="submit" className="inline-flex items-center gap-2 rounded-md bg-black text-white h-9 px-4 text-sm hover:bg-black/90">
           <UploadIcon className="w-4 h-4" />

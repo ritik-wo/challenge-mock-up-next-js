@@ -1,37 +1,36 @@
-// Color variables for consistent theming across the application
 export const colors = {
   // Text colors
   text: {
-    primary: 'text-gray-900',      // Black/dark text for headings and primary content
-    secondary: 'text-gray-700',    // Dark grey for secondary text
-    tertiary: 'text-gray-500',     // Light grey for tertiary text, labels, hints
-    muted: 'text-gray-400',        // Very light grey for placeholders, disabled text
-    white: 'text-white',           // White text for dark backgrounds
+    primary: 'text-gray-900',      
+    secondary: 'text-gray-700',    
+    tertiary: 'text-gray-500',    
+    muted: 'text-gray-400',       
+    white: 'text-white',          
   },
   
   // Background colors
   bg: {
-    primary: 'bg-white',           // Primary white background
-    secondary: 'bg-gray-50',       // Light grey background for sections
-    tertiary: 'bg-gray-100',       // Medium grey background for cards, inputs
-    dark: 'bg-gray-900',           // Dark background for buttons, icons
-    overlay: 'bg-black/30',        // Semi-transparent overlay
+    primary: 'bg-white',           
+    secondary: 'bg-gray-50',       
+    tertiary: 'bg-gray-100',       
+    dark: 'bg-gray-900',           
+    overlay: 'bg-black/30',        
   },
   
   // Border colors
   border: {
-    light: 'border-gray-200',      // Light border for cards, inputs
-    medium: 'border-gray-300',     // Medium border for buttons, dividers
-    dark: 'border-gray-400',       // Darker border for active states
-    dashed: 'border-2 border-dashed border-gray-300',  // Thicker dashed border for file uploads
-    dashedActive: 'border-2 border-dashed border-red-500', // Active state for file uploads
+    light: 'border-gray-200',      
+    medium: 'border-gray-300',     
+    dark: 'border-gray-400',       
+    dashed: 'border-2 border-dashed border-gray-300',  
+    dashedActive: 'border-2 border-dashed border-red-500', 
   },
   
   hover: {
-    light: 'hover:bg-gray-50',     // Light hover for buttons
-    medium: 'hover:bg-gray-100',   // Medium hover for cards
-    dark: 'hover:bg-black/90',     // Dark hover for primary buttons
-    text: 'hover:text-gray-900',   // Text hover state
+    light: 'hover:bg-gray-50',     
+    medium: 'hover:bg-gray-100',   
+    dark: 'hover:bg-black/90',     
+    text: 'hover:text-gray-900',   
   },
   
   focus: {

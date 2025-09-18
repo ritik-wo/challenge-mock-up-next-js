@@ -13,6 +13,8 @@ export type DocumentPreviewModalProps = {
 
 export function DocumentPreviewModal({ open, onClose, document: documentData, type = 'preview' }: DocumentPreviewModalProps) {
   const [mounted, setMounted] = React.useState(false);
+  const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
+  const prevActiveRef = React.useRef<Element | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
@@ -30,6 +32,26 @@ export function DocumentPreviewModal({ open, onClose, document: documentData, ty
     };
   }, [open]);
 
+  React.useEffect(() => {
+    if (!open) return;
+    prevActiveRef.current = document.activeElement;
+    const id = window.setTimeout(() => closeBtnRef.current?.focus({ preventScroll: true }), 0);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown, { capture: true });
+    return () => {
+      window.clearTimeout(id);
+      document.removeEventListener('keydown', onKeyDown, { capture: true } as any);
+      if (prevActiveRef.current instanceof HTMLElement) {
+        prevActiveRef.current.focus({ preventScroll: true });
+      }
+    };
+  }, [open, onClose]);
+
   if (!mounted || !open || !documentData) return null;
 
   const modalContent = (
@@ -44,20 +66,22 @@ export function DocumentPreviewModal({ open, onClose, document: documentData, ty
         margin: 0,
         padding: 0
       }}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="document-preview-title"
     >
-      {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black bg-opacity-50"
         onClick={onClose}
+        aria-hidden="true"
       />
       
-      {/* Simple Message Dialog */}
       <div className="relative bg-white rounded-lg p-6 w-full max-w-md mx-4 z-10">
         <div className="text-center">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
             <FileIcon className="w-6 h-6 text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">
+          <h3 id="document-preview-title" className="text-lg font-medium text-gray-900 mb-2">
             {type === 'delete' ? 'Cannot Delete Document' : 'Document Preview'}
           </h3>
           <p className="text-gray-600 mb-6">
@@ -68,6 +92,7 @@ export function DocumentPreviewModal({ open, onClose, document: documentData, ty
           </p>
           <button
             type="button"
+            ref={closeBtnRef}
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-black/90 transition-colors"
           >

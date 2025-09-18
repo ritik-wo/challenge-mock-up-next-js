@@ -22,7 +22,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile overlay */}
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/30 md:hidden"
@@ -39,7 +38,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
      >
         <div className={`px-5 py-6 border-b ${colors.border.light}`}>
           <div className={`text-base font-semibold flex items-center gap-2 ${colors.text.primary}`}>
-            {/* Title icon: folder-open with dark background */}
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-gray-900">
               <FolderOpenIcon className="w-4 h-4 text-white" />
             </span>
@@ -60,7 +58,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 )}
                 onClick={onClose}
               >
-                {/* Item icons */}
                 {item.href === '/sop' ? (
                   <FileTextIcon className="w-4 h-4" />
                 ) : (

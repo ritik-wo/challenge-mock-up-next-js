@@ -6,10 +6,10 @@ import { ProjectDetailModal, type Project } from '@/components/ProjectDetailModa
 import { NewProjectForm } from '@/components/NewProjectForm';
 import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { PlusIcon, FolderIcon } from '@/components/icons';
+import { PageHeader } from '@/components/PageHeader';
 
 const PROJECTS_STORAGE_KEY = 'proplens-projects';
 
-// Default projects that always appear on page load
 const DEFAULT_PROJECTS: Project[] = [
   {
     title: "Skyline Towers",
@@ -54,14 +54,11 @@ const DEFAULT_PROJECTS: Project[] = [
 ];
 
 const projectsAPI = {
-  // Fetch all projects from localStorage and merge with defaults
   getAll: (): Project[] => {
     try {
       const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
       const userProjects = stored ? JSON.parse(stored) : [];
       
-      // Always return default projects + user projects
-      // Filter out any user projects that have the same title as default projects
       const filteredUserProjects = userProjects.filter((userProject: Project) => 
         !DEFAULT_PROJECTS.some(defaultProject => defaultProject.title === userProject.title)
       );
@@ -73,7 +70,6 @@ const projectsAPI = {
     }
   },
 
-  // Save a new project to localStorage (only user projects)
   save: (project: any) => {
     try {
       const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
@@ -81,7 +77,7 @@ const projectsAPI = {
       
       const newProject: Project = {
         ...project,
-        createdAt: new Date().toISOString().split('T')[0], // YYYY-MM-DD format
+        createdAt: new Date().toISOString().split('T')[0],
       };
       
       userProjects.push(newProject);
@@ -93,13 +89,11 @@ const projectsAPI = {
     }
   },
 
-  // Delete a project by title (only affects localStorage, not default projects)
   delete: (title: string) => {
     try {
       const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
       const userProjects = stored ? JSON.parse(stored) : [];
       
-      // Only delete from user projects (localStorage), not default projects
       const filteredUserProjects = userProjects.filter((p: Project) => p.title !== title);
       localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(filteredUserProjects));
     } catch (error) {
@@ -118,11 +112,9 @@ export default function ProjectsPage() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [projectToDelete, setProjectToDelete] = useState<string | null>(null);
 
-  // Load projects from localStorage on component mount
   useEffect(() => {
     const loadProjects = async () => {
       try {
-        // Add a small delay to show the loader (optional)
         await new Promise(resolve => setTimeout(resolve, 300));
         const loadedProjects = projectsAPI.getAll();
         setProjects(loadedProjects);
@@ -150,7 +142,6 @@ export default function ProjectsPage() {
 
   const handleSaveNew = (vals: any) => {
     try {
-      // Transform form data to project format
       let lat = 0, lng = 0;
       if (typeof vals.coordinates === 'string') {
         const m = vals.coordinates.match(/^\s*(-?\d{1,2}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/);
@@ -171,10 +162,8 @@ export default function ProjectsPage() {
         documents: vals.documents ? Object.values(vals.documents).flat() : [],
       };
 
-      // Save to localStorage
       const savedProject = projectsAPI.save(projectData);
       
-      // Update local state
       setProjects(prev => [savedProject, ...prev]);
       setShowNewForm(false);
       
@@ -213,17 +202,16 @@ export default function ProjectsPage() {
 
   return (
     <div className="space-y-6 -mt-4">
-      {/* Header / Hero */}
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="text-xl sm:text-xl font-semibold">Details about our projects</h1>
-          <p className="mt-1 text-base text-gray-500">Upload and manage project documentation and details</p>
-        </div>
-        <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
-          <PlusIcon className="w-4 h-4" />
-          Add New Project
-        </button>
-      </div>
+      <PageHeader
+        title="Details about our projects"
+        subtitle="Upload and manage project documentation and details"
+        rightSlot={(
+          <button className="self-start inline-flex items-center gap-2 rounded-lg bg-black text-white h-9 px-3 text-sm font-medium hover:bg-black/90" data-testid="add-project" onClick={() => setShowNewForm((s) => !s)}>
+            <PlusIcon className="w-4 h-4" />
+            Add New Project
+          </button>
+        )}
+      />
 
       {showNewForm && (
         <NewProjectForm
@@ -231,8 +219,6 @@ export default function ProjectsPage() {
           onSave={handleSaveNew}
         />
       )}
-
-      {/* Existing Projects */}
       <section className="card p-6">
         <div className="text-sm text-gray-900 mb-4">Existing Projects</div>
         {isLoading ? (
@@ -273,7 +259,6 @@ export default function ProjectsPage() {
         )}
       </section>
 
-      {/* SharePoint footer */}
       <section className="card p-4">
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input

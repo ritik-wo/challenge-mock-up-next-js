@@ -1,16 +1,16 @@
 "use client";
 import React, { useRef, useState } from 'react';
-import { UploadIcon } from './icons';
+import { UploadIcon, FileTextIcon } from './icons';
 import { colors } from '../styles/colors';
 
 export type FileUploadCustomProps = {
   onFilesSelected?: (files: FileList) => void;
   buttonLabel?: string;
-  title?: string; // e.g., "Upload files"
-  subtitle?: string; // e.g., "Drag and drop files here or click to browse"
+  title?: string;
+  subtitle?: string;
   className?: string;
-  multiple?: boolean; // Allow multiple files or single file only
-  acceptedTypes?: string[]; // Allowed file types, e.g., ['pdf', 'jpg', 'jpeg']
+  multiple?: boolean;
+  acceptedTypes?: string[];
 };
 
 export function FileUploadCustom({ 
@@ -35,18 +35,15 @@ export function FileUploadCustom({
     const newFiles = Array.from(files).filter(isValidFileType);
     
     if (newFiles.length === 0) {
-      return; // Silently ignore invalid files
+      return;
     }
 
     if (multiple) {
-      // Multiple files allowed - add to existing
       setUploadedFiles(prev => [...prev, ...newFiles]);
     } else {
-      // Single file only - replace existing
       setUploadedFiles(newFiles.slice(0, 1));
     }
     
-    // Create a new FileList-like object for the callback
     const dataTransfer = new DataTransfer();
     newFiles.forEach(file => dataTransfer.items.add(file));
     onFilesSelected?.(dataTransfer.files);
@@ -74,7 +71,6 @@ export function FileUploadCustom({
 
   return (
     <div className={className}>
-      {/* Upload Area */}
       <div
         className={`rounded-lg ${isDragging ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-gray-300 hover:border-gray-600'} p-8`}
         onDragOver={(e) => {
@@ -116,7 +112,6 @@ export function FileUploadCustom({
         </div>
       </div>
       
-      {/* Uploaded Files List - Outside the dashed box */}
       {uploadedFiles.length > 0 && (
         <div className="mt-4">
           <div className="text-sm font-medium text-gray-700 mb-2">
@@ -127,14 +122,7 @@ export function FileUploadCustom({
               <div key={index} className="flex items-center justify-between bg-gray-100 rounded-lg p-3 border">
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 flex items-center justify-center">
-                    {/* Match Sales SOPs icon, but red */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-red-600">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                      <path d="M14 2v6h6" />
-                      <path d="M16 13H8" />
-                      <path d="M16 17H8" />
-                      <path d="M10 9H8" />
-                    </svg>
+                    <FileTextIcon className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
                     <div className="text-sm font-medium text-gray-900">{file.name}</div>

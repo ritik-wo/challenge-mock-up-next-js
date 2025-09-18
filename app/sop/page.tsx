@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { DocumentSection } from '@/components/DocumentSection';
+import { PageHeader } from '@/components/PageHeader';
 import { FileTextIcon, UsersIcon, UserPlusIcon } from '@/components/icons';
 import type { Document } from '@/components/DocumentCard';
 
-// Configuration for all SOP sections with static documents
 const sopSections = [
   {
     id: 'sales-sops',
@@ -70,10 +70,8 @@ const sopSections = [
 export default function SopPage() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Simulate loading state
   useEffect(() => {
     const loadData = async () => {
-      // Add a small delay to show loading state
       await new Promise(resolve => setTimeout(resolve, 300));
       setIsLoading(false);
     };
@@ -84,13 +82,10 @@ export default function SopPage() {
   if (isLoading) {
     return (
       <div className="space-y-6 -mt-4">
-        {/* Header */}
-        <div>
-          <h1 className="text-lg sm:text-xl font-semibold">SOP & Policies Management</h1>
-          <p className="mt-1 text-sm text-gray-500">Manage standard operating procedures, policies, and guidelines for your organization</p>
-        </div>
-
-        {/* Loading State */}
+        <PageHeader
+          title="SOP & Policies Management"
+          subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
+        />
         <div className="text-center py-12">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-600"></div>
@@ -104,13 +99,11 @@ export default function SopPage() {
 
   return (
     <div className="space-y-8 -mt-4">
-      {/* Header */}
-      <div>
-        <h1 className="text-lg sm:text-xl font-semibold">SOP & Policies Management</h1>
-        <p className="mt-1 text-sm text-gray-500">Manage standard operating procedures, policies, and guidelines for your organization</p>
-      </div>
+      <PageHeader
+        title="SOP & Policies Management"
+        subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
+      />
 
-      {/* Document Sections */}
       <div className="space-y-8">
         {sopSections.map((section) => (
           <DocumentSection

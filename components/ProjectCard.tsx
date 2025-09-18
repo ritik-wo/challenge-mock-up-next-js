@@ -13,7 +13,6 @@ export function ProjectCard({ title, createdAt, onView, onDelete }: ProjectCardP
   return (
     <div className="flex items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-4">
       <div className="flex items-center gap-3">
-        {/* Folder icon (plain) */}
         <FolderIcon className="w-5 h-5 text-gray-500" />
         <div>
           <div className="text-base font-semibold text-gray-900">{title}</div>

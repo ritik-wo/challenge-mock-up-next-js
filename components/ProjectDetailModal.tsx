@@ -9,7 +9,7 @@ export type Project = {
   createdAt: string;
   url?: string;
   videos?: Array<{ label: string; url: string }>;
-  coordinates?: string; // e.g., "19.0760, 72.8777"
+  coordinates?: string;
   documents?: Array<{ name: string; type?: string }>;
 };
 
@@ -20,25 +20,44 @@ export type ProjectDetailModalProps = {
 };
 
 export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModalProps) {
+  const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
+  const prevActiveRef = React.useRef<Element | null>(null);
+
+  React.useEffect(() => {
+    if (!open) return;
+    prevActiveRef.current = document.activeElement;
+    const id = window.setTimeout(() => closeBtnRef.current?.focus({ preventScroll: true }), 0);
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.stopPropagation();
+        onClose();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown, { capture: true });
+    return () => {
+      window.clearTimeout(id);
+      document.removeEventListener('keydown', onKeyDown, { capture: true } as any);
+      if (prevActiveRef.current instanceof HTMLElement) {
+        prevActiveRef.current.focus({ preventScroll: true });
+      }
+    };
+  }, [open, onClose]);
+
   if (!open || !project) return null;
 
   return (
-    <div className="fixed inset-0 z-50">
-      <div className="fixed inset-0 bg-black/50" onClick={onClose} aria-hidden />
+    <div className="fixed inset-0 z-50" role="dialog" aria-modal="true" aria-labelledby="project-details-title">
+      <div className="fixed inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
       <div className="fixed inset-0 overflow-y-auto px-4 sm:px-6 py-10">
         <div className="mx-auto max-w-[38.4rem] rounded-xl bg-white shadow-soft border">
-          {/* Header */}
           <div className="flex items-start justify-between border-b px-6 pt-6 pb-4">
             <div>
-              <h2 className="text-lg font-semibold">Project Details</h2>
+              <h2 id="project-details-title" className="text-lg font-semibold">Project Details</h2>
               <p className="text-sm text-gray-500">Complete project information and documentation</p>
             </div>
-            <button onClick={onClose} className="text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-2 py-1 rounded transition-colors">✕ Close</button>
+            <button ref={closeBtnRef} onClick={onClose} className="text-sm font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 px-2 py-1 rounded transition-colors">✕ Close</button>
           </div>
-
-          {/* Content */}
           <div className="px-6 pt-6 pb-6 space-y-4">
-            {/* Project Name */}
             <div>
               <div className="text-sm font-medium mb-2 flex items-center gap-2 text-gray-900">
                 <FolderIcon className="w-4 h-4 text-gray-500" />
@@ -46,8 +65,6 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
               </div>
               <div className="rounded-md bg-gray-100 border px-4 py-3 text-sm text-gray-700">{project.title}</div>
             </div>
-
-            {/* Project URL */}
             {project.url && (
               <div>
                 <div className="text-sm font-medium mb-2 flex items-center gap-2 text-gray-900">
@@ -63,8 +80,6 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                 </div>
               </div>
             )}
-
-            {/* Videos */}
             {!!project.videos?.length && (
               <div className="space-y-2">
                 <div className="text-sm font-medium flex items-center gap-2 text-gray-900"><VideoIcon className="w-4 h-4 text-gray-500" /> Project Video Links</div>
@@ -85,8 +100,6 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                 ))}
               </div>
             )}
-
-            {/* Coordinates */}
             {project.coordinates && (
               <div>
                 <div className="text-sm font-medium mb-2 flex items-center gap-2 text-gray-900">
@@ -96,8 +109,6 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                 <div className="rounded-md bg-gray-100 border px-4 py-3 text-sm text-gray-700">{project.coordinates}</div>
               </div>
             )}
-
-            {/* Documents (always show placeholder) */}
             <div className="space-y-2">
               <div className="text-sm font-medium flex items-center gap-2 text-gray-900">
                 <FileIcon className="w-4 h-4 text-gray-500" /> Project Documents
@@ -115,8 +126,6 @@ export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModa
                 <ViewButton onClick={() => {}} />
               </div>
             </div>
-
-            {/* Created Date */}
             <div>
               <div className="text-sm font-medium mb-2 flex items-center gap-2 text-gray-900">
                 <FolderIcon className="w-4 h-4 text-gray-500" />

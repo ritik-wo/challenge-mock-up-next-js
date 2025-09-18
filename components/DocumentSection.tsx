@@ -31,7 +31,6 @@ export function DocumentSection({
   const [modalType, setModalType] = useState<'preview' | 'delete'>('preview');
 
   const handleFilesSelected = (files: FileList) => {
-    // Just show a toast for now - no actual upload functionality
     toast.success(`${files.length} file(s) selected for upload!`);
   };
 
@@ -48,9 +47,7 @@ export function DocumentSection({
 
   return (
     <div className={className}>
-      {/* Single Card containing Header, Upload Area and Current Documents */}
       <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
-        {/* Section Header */}
         <div className="flex items-start gap-3">
           <div className={`w-10 h-10 rounded-lg ${iconBgColor} flex items-center justify-center flex-shrink-0 mt-1`}>
             {icon}
@@ -60,8 +57,6 @@ export function DocumentSection({
             <p className="text-sm text-gray-600">{description}</p>
           </div>
         </div>
-
-        {/* Upload Area */}
         <FileUploadCustom
           onFilesSelected={handleFilesSelected}
           multiple={true}
@@ -69,8 +64,6 @@ export function DocumentSection({
           title="Upload files"
           subtitle="Drag and drop files here or click to browse"
         />
-
-        {/* Current Documents */}
         {staticDocuments.length > 0 && (
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -94,8 +87,6 @@ export function DocumentSection({
           </div>
         )}
       </div>
-
-      {/* Preview/Delete Modal */}
       <DocumentPreviewModal
         open={showPreview}
         onClose={() => setShowPreview(false)}
