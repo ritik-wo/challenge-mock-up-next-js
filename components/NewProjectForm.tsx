@@ -71,11 +71,11 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         persistToLocalStorage(vals);
         onSave?.(vals);
       })}
-      className="card p-4 space-y-4"
+      className="card p-6 space-y-4"
       data-testid="new-project-form"
     >
       <div className="mb-4">
-        <h2 className={`text-sm ${colors.text.primary}`}>Add New Project</h2>
+        <h2 className={`text-base ${colors.text.primary}`}>Add New Project</h2>
       </div>
       <div>
         <label htmlFor="project-name" className={`text-sm font-medium mb-2 block ${colors.text.primary}`}>
@@ -83,7 +83,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         </label>
         <input
           id="project-name"
-          className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400`}
+          className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.secondary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400`}
           placeholder="Enter project name"
           {...register('name', { required: 'Project name is required', setValueAs: (v) => (typeof v === 'string' ? v.trim() : v) })}
           aria-invalid={!!errors.name}
@@ -128,7 +128,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         <div className="flex items-center gap-2">
           <input
             id="project-url"
-            className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400`}
+            className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.secondary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-brand-400/50 focus:border-brand-400`}
             placeholder="https://example.com/project"
             {...register('projectUrl', {
               required: 'Project URL is required',
@@ -172,7 +172,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
               <label htmlFor={`videos.${idx}.url`} className="text-sm font-medium mb-1 inline-block">Video URL</label>
               <input
                 id={`videos.${idx}.url`}
-                className={`w-full rounded-md border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-3 py-2 placeholder:text-sm`}
+                className={`w-full rounded-md border ${colors.border.light} ${colors.bg.secondary} ${colors.text.secondary} px-3 py-2 placeholder:text-sm`}
                 placeholder="https://youtube.com/watch?v=..."
                 {...register(`videos.${idx}.url` as const, {
                   validate: (v) => (!v || isValidUrl(v) ? true : 'Enter a valid URL'),
@@ -183,7 +183,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
               <label htmlFor={`videos.${idx}.description`} className="text-sm font-medium mb-1 inline-block">Video description</label>
               <input
                 id={`videos.${idx}.description`}
-                className={`w-full rounded-md border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-3 py-2 placeholder:text-sm`}
+                className={`w-full rounded-md border ${colors.border.light} ${colors.bg.secondary} ${colors.text.secondary} px-3 py-2 placeholder:text-sm`}
                 placeholder="e.g., Project Overview, Virtual Tour, Amenities..."
                 {...register(`videos.${idx}.description` as const, { maxLength: 120 })}
               />
@@ -205,7 +205,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         </label>
         <input
           id="coordinates"
-          className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-3 py-2 placeholder:${colors.text.muted}`}
+          className={`w-[40%] rounded-md border ${colors.border.light} ${colors.bg.secondary} ${colors.text.secondary} px-3 py-2 placeholder:${colors.text.muted}`}
           placeholder="e.g., 19.0760, 72.8777"
           {...register('coordinates', {
             required: 'Location coordinates are required',

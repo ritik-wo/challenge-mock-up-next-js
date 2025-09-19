@@ -72,7 +72,11 @@ export function FileUploadCustom({
   return (
     <div className={className}>
       <div
-        className={`rounded-lg ${isDragging ? 'border-2 border-dashed border-red-500' : `border-2 border-dashed ${colors.border.medium} hover:${colors.border.dark}`} p-8`}
+        className={`rounded-lg ${
+          isDragging
+            ? 'border-2 border-dashed border-red-500'
+            : `border-2 border-dashed ${colors.border.medium} hover:border-gray-400 transition-colors`
+        } p-8`}
         onDragOver={(e) => {
           e.preventDefault();
           setIsDragging(true);
