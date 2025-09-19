@@ -1,6 +1,5 @@
 "use client";
-import React from 'react';
-import { CalendarIcon } from './icons';
+import React, { useRef, useEffect } from 'react';
 import { FolderIcon, LinkIcon, VideoIcon, MapPinIcon, FileIcon } from './icons';
 import { ViewButton } from './ActionButtons';
 import { colors } from '../styles/colors';
@@ -21,28 +20,7 @@ export type ProjectDetailModalProps = {
 };
 
 export function ProjectDetailModal({ open, onClose, project }: ProjectDetailModalProps) {
-  const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
-  const prevActiveRef = React.useRef<Element | null>(null);
-
-  React.useEffect(() => {
-    if (!open) return;
-    prevActiveRef.current = document.activeElement;
-    const id = window.setTimeout(() => closeBtnRef.current?.focus({ preventScroll: true }), 0);
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', onKeyDown, { capture: true });
-    return () => {
-      window.clearTimeout(id);
-      document.removeEventListener('keydown', onKeyDown, { capture: true } as any);
-      if (prevActiveRef.current instanceof HTMLElement) {
-        prevActiveRef.current.focus({ preventScroll: true });
-      }
-    };
-  }, [open, onClose]);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
   if (!open || !project) return null;
 

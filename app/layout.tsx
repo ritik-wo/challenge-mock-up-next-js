@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import './globals.css';
 import { Sidebar } from '@/components/Sidebar';
 import { Topbar } from '@/components/Topbar';
-import { colors } from '../styles/colors';
 import clsx from 'clsx';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

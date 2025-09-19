@@ -54,7 +54,7 @@ export function DocumentSection({
           </div>
           <div>
             <h2 className={`text-lg font-semibold ${colors.text.primary}`}>{title}</h2>
-            <p className={`text-sm ${colors.text.quaternary}`}>{description}</p>
+            <p className={`text-base ${colors.text.tertiary}`}>{description}</p>
           </div>
         </div>
         <FileUploadCustom

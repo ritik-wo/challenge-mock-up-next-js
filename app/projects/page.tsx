@@ -8,101 +8,8 @@ import { ConfirmDeleteModal } from '@/components/ConfirmDeleteModal';
 import { PlusIcon, FolderIcon } from '@/components/icons';
 import { PageHeader } from '@/components/PageHeader';
 import { colors } from '../../styles/colors';
-
-const PROJECTS_STORAGE_KEY = 'proplens-projects';
-
-const DEFAULT_PROJECTS: Project[] = [
-  {
-    title: "Skyline Towers",
-    url: "https://skylinetowers.com",
-    videos: [
-      {
-        label: "Project Overview Video",
-        url: "https://youtube.com/watch?v=sample1"
-      },
-      {
-        label: "Virtual Tour",
-        url: "https://vimeo.com/sample2"
-      }
-    ],
-    coordinates: "19.076, 72.8777",
-    documents: [
-      {
-        name: "Skyline_Towers_Brochure.pdf",
-        type: "PDF Document"
-      }
-    ],
-    createdAt: "2025-08-15"
-  },
-  {
-    title: "Garden Residency",
-    url: "https://gardenresidency.com",
-    videos: [
-      {
-        label: "Amenities Showcase",
-        url: "https://youtube.com/watch?v=sample3"
-      }
-    ],
-    coordinates: "19.1136, 72.8697",
-    documents: [
-      {
-        name: "Garden_Residency_Brochure.pdf",
-        type: "PDF Document"
-      }
-    ],
-    createdAt: "2025-08-15"
-  }
-];
-
-const projectsAPI = {
-  getAll: (): Project[] => {
-    try {
-      const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
-      const userProjects = stored ? JSON.parse(stored) : [];
-      
-      const filteredUserProjects = userProjects.filter((userProject: Project) => 
-        !DEFAULT_PROJECTS.some(defaultProject => defaultProject.title === userProject.title)
-      );
-      
-      return [...DEFAULT_PROJECTS, ...filteredUserProjects];
-    } catch (error) {
-      console.error('Error fetching projects from localStorage:', error);
-      return DEFAULT_PROJECTS;
-    }
-  },
-
-  save: (project: any) => {
-    try {
-      const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
-      const userProjects = stored ? JSON.parse(stored) : [];
-      
-      const newProject: Project = {
-        ...project,
-        createdAt: new Date().toISOString().split('T')[0],
-      };
-      
-      userProjects.push(newProject);
-      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(userProjects));
-      return newProject;
-    } catch (error) {
-      console.error('Error saving project to localStorage:', error);
-      throw error;
-    }
-  },
-
-  delete: (title: string) => {
-    try {
-      const stored = localStorage.getItem(PROJECTS_STORAGE_KEY);
-      const userProjects = stored ? JSON.parse(stored) : [];
-      
-      const filteredUserProjects = userProjects.filter((p: Project) => p.title !== title);
-      localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(filteredUserProjects));
-    } catch (error) {
-      console.error('Error deleting project from localStorage:', error);
-      throw error;
-    }
-  }
-};
+import { projectsAPI } from './storage';
+import { CustomLoader } from '@/components/CustomLoader';
 
 export default function ProjectsPage() {
   const [open, setOpen] = useState(false);
@@ -220,16 +127,13 @@ export default function ProjectsPage() {
           onSave={handleSaveNew}
         />
       )}
-      <section className="card p-8">
+      <section className="card p-6">
         <div className={`text-base ${colors.text.primary} mb-6`}>Existing Projects</div>
         {isLoading ? (
-          <div className="text-center py-12">
-            <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
-              <div className={`animate-spin rounded-full h-10 w-10 border-4 border-gray-300 border-t-gray-900`}></div>
-            </div>
-            <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>Loading projects...</h3>
-            <p className={colors.text.tertiary}>Please wait while we fetch your projects</p>
-          </div>
+          <CustomLoader
+            title="Loading projects..."
+            subtitle="Please wait while we fetch your projects"
+          />
         ) : projects.length > 0 ? (
           <div className="space-y-3">
             {projects.map((p) => (
@@ -260,7 +164,7 @@ export default function ProjectsPage() {
         )}
       </section>
 
-      <section className="card p-4">
+      <section className="card p-6">
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input
           aria-label="SharePoint link"

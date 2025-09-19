@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { colors } from '../styles/colors';
 
@@ -18,50 +18,16 @@ export function ConfirmDeleteModal({
   title = "Confirm Deletion",
   message = "Are you sure you would like to delete the file?"
 }: ConfirmDeleteModalProps) {
-  const [mounted, setMounted] = React.useState(false);
-  const cancelBtnRef = React.useRef<HTMLButtonElement | null>(null);
-  const prevActiveRef = React.useRef<Element | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const cancelBtnRef = useRef<HTMLButtonElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
-  React.useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '0px';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-    };
-  }, [open]);
-
-  React.useEffect(() => {
-    if (!open) return;
-    prevActiveRef.current = document.activeElement;
-    const id = window.setTimeout(() => cancelBtnRef.current?.focus({ preventScroll: true }), 0);
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', onKeyDown, { capture: true });
-    return () => {
-      window.clearTimeout(id);
-      document.removeEventListener('keydown', onKeyDown, { capture: true } as any);
-      if (prevActiveRef.current instanceof HTMLElement) prevActiveRef.current.focus({ preventScroll: true });
-    };
-  }, [open, onClose]);
-
   if (!mounted || !open) return null;
 
-  const modalContent = (
+  const modalContent = (  
     <div 
       className="fixed inset-0 z-[9999] flex items-center justify-center"
       style={{ 

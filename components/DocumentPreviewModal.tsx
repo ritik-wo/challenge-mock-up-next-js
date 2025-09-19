@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { FileIcon } from './icons';
 import type { Document } from './DocumentCard';
@@ -13,45 +13,12 @@ export type DocumentPreviewModalProps = {
 };
 
 export function DocumentPreviewModal({ open, onClose, document: documentData, type = 'preview' }: DocumentPreviewModalProps) {
-  const [mounted, setMounted] = React.useState(false);
-  const closeBtnRef = React.useRef<HTMLButtonElement | null>(null);
-  const prevActiveRef = React.useRef<Element | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
-
-  React.useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
-  React.useEffect(() => {
-    if (!open) return;
-    prevActiveRef.current = document.activeElement;
-    const id = window.setTimeout(() => closeBtnRef.current?.focus({ preventScroll: true }), 0);
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.stopPropagation();
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', onKeyDown, { capture: true });
-    return () => {
-      window.clearTimeout(id);
-      document.removeEventListener('keydown', onKeyDown, { capture: true } as any);
-      if (prevActiveRef.current instanceof HTMLElement) {
-        prevActiveRef.current.focus({ preventScroll: true });
-      }
-    };
-  }, [open, onClose]);
 
   if (!mounted || !open || !documentData) return null;
 

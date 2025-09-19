@@ -88,14 +88,14 @@ export function FileUploadCustom({
         tabIndex={0}
       >
         <div className={`grid place-items-center ${colors.bg.primary}`}>
-          <div className={`h-10 w-10 rounded-full ${colors.bg.tertiary} ${colors.text.quaternary} grid place-items-center mb-3`}>
-            <UploadIcon className="w-5 h-5" />
+          <div className={`h-12 w-12 rounded-full ${colors.bg.tertiary} ${colors.text.tertiary} grid place-items-center mb-3`}>
+            <UploadIcon className="w-5 h-5 p-0.5" />
           </div>
-          <div className={`text-base font-medium ${colors.text.primary} mb-1`}>{title}</div>
-          <div className={`text-sm ${colors.text.tertiary} mb-4`}>{subtitle}</div>
+          <div className={`text-base ${colors.text.primary} mb-1`}>{title}</div>
+          <div className={`text-base ${colors.text.tertiary} mb-4`}>{subtitle}</div>
           <button
             type="button"
-            className={`inline-flex items-center gap-2 rounded-md border ${colors.border.medium} ${colors.bg.primary} h-8 px-3 text-sm ${colors.text.secondary} ${colors.hover.light}`}
+            className={`inline-flex items-center gap-2 rounded-md border ${colors.border.medium} ${colors.bg.primary} h-8 px-3 text-sm font-medium ${colors.text.secondary} ${colors.hover.light}`}
             onClick={(e) => {
               e.stopPropagation();
               inputRef.current?.click();

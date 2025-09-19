@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { DocumentSection } from '@/components/DocumentSection';
 import { PageHeader } from '@/components/PageHeader';
+import { CustomLoader } from '@/components/CustomLoader';
 import { FileTextIcon, UsersIcon, UserPlusIcon } from '@/components/icons';
-import type { Document } from '@/components/DocumentCard';
-import { colors } from '../../styles/colors';
 
 const sopSections = [
   {
@@ -83,17 +82,14 @@ export default function SopPage() {
   if (isLoading) {
     return (
       <div className="space-y-8">
-        <PageHeader
-          title="SOP & Policies Management"
-          subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
+      <PageHeader
+        title="SOP & Policies Management"
+        subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
+      />
+        <CustomLoader
+          title="Loading documents..."
+          subtitle="Please wait while we fetch your documents"
         />
-        <div className="text-center py-12">
-          <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
-            <div className={`animate-spin rounded-full h-10 w-10 border-4 border-gray-300 ${colors.text.quaternary.replace('text-', 'border-t-')}`}></div>
-          </div>
-          <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>Loading documents...</h3>
-          <p className={colors.text.tertiary}>Please wait while we fetch your documents</p>
-        </div>
       </div>
     );
   }
