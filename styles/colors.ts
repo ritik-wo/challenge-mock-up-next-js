@@ -11,7 +11,7 @@ export const colors = {
   bg: {
     primary: 'bg-white',           
     secondary: 'bg-gray-50',       
-    tertiary: 'bg-gray-100',
+    tertiary: 'bg-gray-200',
     quaternary: 'bg-gray-200',       
     dark: 'bg-gray-900',           
     overlay: 'bg-black/30',        
