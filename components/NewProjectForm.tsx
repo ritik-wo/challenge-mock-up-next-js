@@ -98,7 +98,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         <div className="text-sm font-medium">Project Documents</div>
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
-            <FileIcon className="w-4 h-4 text-gray-500" /> Brochure
+            <FileIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Brochure
           </div>
           <Controller
             control={control}
@@ -110,7 +110,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         </div>
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
-            <FileIcon className="w-4 h-4 text-gray-500" /> Floor Plan set
+            <FileIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Floor Plan set
           </div>
           <Controller
             control={control}
@@ -123,7 +123,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       </div>
       <div>
         <label htmlFor="project-url" className="text-sm font-medium mb-2 flex items-center gap-2">
-          <LinkIcon className="w-4 h-4 text-gray-500" /> Project URL *
+          <LinkIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Project URL *
         </label>
         <div className="flex items-center gap-2">
           <input
@@ -142,7 +142,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
             onClick={() => {
               if (isValidUrl(watchedUrl || '')) window.open(watchedUrl, '_blank', 'noopener');
             }}
-            className={`inline-flex items-center gap-2 rounded-md border border-gray-00 ${colors.bg.primary} h-8 px-3 text-sm font-semibold ${colors.hover.light} shadow-sm`}
+            className={`inline-flex items-center gap-2 rounded-md border ${colors.border.light} ${colors.bg.primary} h-8 px-3 text-sm font-semibold ${colors.hover.light} shadow-sm`}
           >
             <LinkIcon className="w-4 h-4" />
             Open
@@ -154,7 +154,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       </div>
       <div className="space-y-3">
         <div className="text-sm font-medium flex items-center gap-2">
-          <VideoIcon className="w-4 h-4 text-gray-500" /> Project Video Links
+          <VideoIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Project Video Links
         </div>
         {fields.map((field, idx: number) => (
           <div key={field.id} className="rounded-lg border p-3 space-y-2 relative">
@@ -162,7 +162,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
               <button
                 type="button"
                 aria-label="Remove video link"
-                className="absolute right-2 top-2 h-6 w-6 rounded-md border text-xs text-gray-600 hover:bg-gray-100"
+                className={`absolute right-2 top-2 h-6 w-6 rounded-md border text-xs ${colors.text.quaternary} ${colors.hover.light}`}
                 onClick={() => remove(idx)}
               >
                 ×
@@ -201,7 +201,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       </div>
       <div>
         <label htmlFor="coordinates" className="text-sm font-medium mb-2 flex items-center gap-2">
-          <MapPinIcon className="w-4 h-4 text-gray-500" /> Location coordinates (Lat/Long) *
+          <MapPinIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Location coordinates (Lat/Long) *
         </label>
         <input
           id="coordinates"
@@ -229,7 +229,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
       <div className="space-y-3">
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
-            <FileIcon className="w-4 h-4 text-gray-500" /> SPA (Sales Purchase Agreement)
+            <FileIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> SPA (Sales Purchase Agreement)
           </div>
           <Controller
             control={control}
@@ -241,7 +241,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
         </div>
         <div>
           <div className="text-sm font-medium mb-2 flex items-center gap-2">
-            <FileIcon className="w-4 h-4 text-gray-500" /> Other Project Documents
+            <FileIcon className={`w-4 h-4 ${colors.text.tertiary}`} /> Other Project Documents
           </div>
           <Controller
             control={control}
@@ -257,7 +257,7 @@ export function NewProjectForm({ onCancel, onSave }: NewProjectFormProps) {
           <UploadIcon className="w-4 h-4" />
           Save Project
         </button>
-        <button type="button" className="inline-flex items-center gap-2 rounded-md border h-9 px-4 text-sm hover:bg-gray-50" onClick={onCancel}>
+        <button type="button" className={`inline-flex items-center gap-2 rounded-md border h-9 px-4 text-sm ${colors.hover.light}`} onClick={onCancel}>
           Cancel
         </button>
       </div>

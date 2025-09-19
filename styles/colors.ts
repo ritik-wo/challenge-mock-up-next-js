@@ -27,7 +27,7 @@ export const colors = {
   
   hover: {
     light: 'hover:bg-gray-50',     
-    medium: 'hover:bg-gray-100',   
+    medium: 'hover:bg-gray-200',   
     dark: 'hover:bg-black/90',     
     text: 'hover:text-gray-900',   
   },

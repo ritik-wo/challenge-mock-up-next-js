@@ -9,7 +9,7 @@ export type TopbarProps = {
 
 export function Topbar({ onMenuClick }: TopbarProps) {
   return (
-    <div className="sticky top-0 z-30 bg-gray-50/80 backdrop-blur supports-[backdrop-filter]:bg-gray-50/60">
+    <div className={`sticky top-0 z-30 ${colors.bg.secondary}/80 backdrop-blur supports-[backdrop-filter]:${colors.bg.secondary}/60`}>
       <div className="container-max py-3 flex items-center justify-between">
         <button
           className={`md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg border ${colors.bg.primary} ${colors.hover.light}`}

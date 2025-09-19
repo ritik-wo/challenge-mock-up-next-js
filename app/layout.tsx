@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './globals.css';
 import { Sidebar } from '@/components/Sidebar';
 import { Topbar } from '@/components/Topbar';
+import { colors } from '../styles/colors';
 import clsx from 'clsx';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen flex bg-gray-50">
+        <div className={`min-h-screen flex ${colors.bg.secondary}`}>
           <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
           <div className={clsx('flex-1 min-w-0', 'md:ml-64')}> 
             <Topbar onMenuClick={() => setSidebarOpen(true)} />
