@@ -11,11 +11,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <div className={`min-h-screen flex ${colors.bg.secondary}`}>
+        <div className={`min-h-screen flex bg-white md:bg-gray-50`}>
           <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
           <div className={clsx('flex-1 min-w-0', 'md:ml-64')}> 
             <Topbar onMenuClick={() => setSidebarOpen(true)} />
-            <main className="container-max py-6">{children}</main>
+            <main className="container-max pt-4 sm:pt-6 pb-3">{children}</main>
           </div>
         </div>
       </body>

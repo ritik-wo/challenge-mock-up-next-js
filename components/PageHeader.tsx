@@ -31,7 +31,7 @@ export function PageHeader({ title, subtitle, rightSlot, id }: PageHeaderProps) 
     <div>
       <h1 id={id} className="text-lg sm:text-xl font-semibold">{title}</h1>
       {subtitle ? (
-        <p className={`mt-1 text-sm ${colors.text.tertiary}`}>{subtitle}</p>
+        <p className={`mt-1 text-base ${colors.text.tertiary}`}>{subtitle}</p>
       ) : null}
     </div>
   );

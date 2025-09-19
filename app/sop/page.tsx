@@ -82,7 +82,7 @@ export default function SopPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-6 -mt-4">
+      <div className="space-y-8">
         <PageHeader
           title="SOP & Policies Management"
           subtitle="Manage standard operating procedures, policies, and guidelines for your organization"
@@ -99,7 +99,7 @@ export default function SopPage() {
   }
 
   return (
-    <div className="space-y-8 -mt-4">
+    <div className="space-y-8">
       <PageHeader
         title="SOP & Policies Management"
         subtitle="Manage standard operating procedures, policies, and guidelines for your organization"

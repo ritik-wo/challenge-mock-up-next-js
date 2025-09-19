@@ -202,7 +202,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="space-y-6 -mt-4">
+    <div className="space-y-7">
       <PageHeader
         title="Details about our projects"
         subtitle="Upload and manage project documentation and details"
@@ -220,8 +220,8 @@ export default function ProjectsPage() {
           onSave={handleSaveNew}
         />
       )}
-      <section className="card p-6">
-        <div className={`text-sm ${colors.text.primary} mb-4`}>Existing Projects</div>
+      <section className="card p-8">
+        <div className={`text-base ${colors.text.primary} mb-6`}>Existing Projects</div>
         {isLoading ? (
           <div className="text-center py-12">
             <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
@@ -264,7 +264,7 @@ export default function ProjectsPage() {
         <div className="text-sm font-medium mb-2">Sharepoint link for project related sales brochures and documents</div>
         <input
           aria-label="SharePoint link"
-          className={`w-[65%] rounded-lg border ${colors.border.light} ${colors.bg.tertiary} ${colors.text.secondary} px-2 py-1.5 placeholder:${colors.text.muted} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 focus:shadow-sm`}
+          className={`w-[65%] rounded-lg border ${colors.border.light} ${colors.bg.secondary} ${colors.text.primary} px-2 py-1.5 placeholder:${colors.text.primary} placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-400 focus:shadow-sm`}
           placeholder="https://sharepoint.com/..."
         />
       </section>

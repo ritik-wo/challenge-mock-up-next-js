@@ -10,7 +10,7 @@ export const colors = {
   
   bg: {
     primary: 'bg-white',           
-    secondary: 'bg-gray-50',       
+    secondary: 'bg-gray-100',       
     tertiary: 'bg-gray-200',
     quaternary: 'bg-gray-200',       
     dark: 'bg-gray-900',           

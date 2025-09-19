@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+html {
+  font-size: 14px;
+}
 :root {
   --bg: #f8fafc;
   --default-font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -14,7 +16,7 @@ body {
 }
 
 .container-max {
-  @apply max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8;
+  @apply max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8;
 }
 
 .card {

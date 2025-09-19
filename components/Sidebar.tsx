@@ -31,7 +31,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       )}
       <aside
         className={clsx(
-          `fixed z-50 inset-y-0 left-0 w-64 ${colors.bg.secondary} border-r ${colors.border.light} flex flex-col`,
+          `fixed z-50 inset-y-0 left-0 w-64 bg-white md:bg-gray-50 border-r ${colors.border.light} flex flex-col`,
           'transition-transform duration-200 md:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         )}
@@ -53,7 +53,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 href={item.href}
                 data-testid={`nav-${item.label}`}
                 className={clsx(
-                  `flex items-center gap-2 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 hover:text-gray-900`,
+                  `flex items-center gap-3 px-1 py-1 rounded-lg text-sm hover:bg-gray-200 hover:text-gray-900`,
                   active ? `bg-gray-200 text-gray-900` : `text-gray-500`
                 )}
                 onClick={onClose}
