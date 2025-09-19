@@ -225,7 +225,7 @@ export default function ProjectsPage() {
         {isLoading ? (
           <div className="text-center py-12">
             <div className={`w-16 h-16 mx-auto mb-4 rounded-full ${colors.bg.tertiary} flex items-center justify-center`}>
-              <div className={`animate-spin rounded-full h-8 w-8 border-b-2 ${colors.text.quaternary.replace('text-', 'border-')}`}></div>
+              <div className={`animate-spin rounded-full h-10 w-10 border-4 border-gray-300 border-t-gray-900`}></div>
             </div>
             <h3 className={`text-lg font-medium ${colors.text.primary} mb-2`}>Loading projects...</h3>
             <p className={colors.text.tertiary}>Please wait while we fetch your projects</p>
