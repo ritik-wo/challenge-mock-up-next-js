@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { FolderIcon, LinkIcon, VideoIcon, MapPinIcon, FileIcon } from './icons';
 import { ViewButton } from './ActionButtons';
 import { colors } from '../styles/colors';

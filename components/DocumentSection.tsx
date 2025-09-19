@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { FileUploadCustom } from './FileUploadCustom';
 import { DocumentCard, type Document } from './DocumentCard';
 import { DocumentPreviewModal } from './DocumentPreviewModal';
-import { ConfirmDeleteModal } from './ConfirmDeleteModal';
 import toast from 'react-hot-toast';
 import { colors } from '../styles/colors';
 

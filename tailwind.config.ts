@@ -14,7 +14,7 @@ const config: Config = {
           200: '#dfe3ef',
           300: '#c6cee3',
           400: '#9eafd0',
-          500: '#1a2238', // dark navy for buttons
+          500: '#1a2238',
           600: '#11182a',
         }
       },

@@ -68,18 +68,18 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             );
           })}
         </nav>
-        <div className={`mt-auto p-4`}>
+        <div className={`mt-auto p-2`}>
           <button className={`w-full flex items-center gap-2 text-left px-4 py-2 text-sm text-gray-500 hover:bg-gray-200 hover:text-gray-900 rounded-lg`}>
             <LogOutIcon className="w-4 h-4" />
             Log out
           </button>
         </div>
-        <div className={`p-4 border-t ${colors.border.light}`}>
+        <div className={`p-6 border-t ${colors.border.light}`}>
           <div className="flex items-center gap-3">
             <div className={`h-8 w-8 rounded-full bg-gray-900 text-white grid place-items-center text-sm font-medium`} style={{ backgroundColor: '#111827', color: 'white' }}>A</div>
             <div>
               <div className={`text-sm font-medium ${colors.text.primary}`}>Admin Sales</div>
-              <div className={`text-xs ${colors.text.tertiary}`}>admin.sales@proplens.com</div>
+              <div className={`text-xs ${colors.text.tertiary}`}>admin.sales@property.com</div>
             </div>
           </div>
         </div>
